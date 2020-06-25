@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+html,
+body {
+  /* 移动端定义字体font-family */
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  height: 100%;
+}
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: #d8d8d8;
+}
