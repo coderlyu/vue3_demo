@@ -14,6 +14,9 @@
     </main>
     <van-tabbar route>
       <van-tabbar-item to="/home" icon="home-o">主页</van-tabbar-item>
+      <span class="tab_more">
+        <van-icon name="add-o" @click="addMore" />
+      </span>
       <van-tabbar-item to="/profile" icon="user-o">我的</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -23,12 +26,17 @@
 import { reactive, toRefs, computed } from "@vue/composition-api";
 export default {
   setup(props, ctx) {
-    const route = computed(() => ctx.root.$route);
+    const _this = ctx.root;
+    const route = computed(() => _this.$route);
     const data = reactive({
       route
     });
+    const addMore = () => {
+      _this.$toast("敬请期待");
+    };
     return {
-      ...toRefs(data)
+      ...toRefs(data),
+      addMore
     };
   }
 };
@@ -47,5 +55,16 @@ main {
 }
 footer {
   height: 50px;
+}
+.tab_more {
+  height: 50px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  i {
+    font-size: 40px;
+    color: lightskyblue;
+  }
 }
 </style>

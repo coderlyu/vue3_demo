@@ -40,7 +40,7 @@
         <van-dropdown-item v-model="orderVal" :options="orderOpt" />
       </van-dropdown-menu>
       <van-pull-refresh v-model="reLoading" @refresh="onRefresh">
-        <div class="list">
+        <div class="list" v-if="bookList.length > 0">
           <template v-for="item in bookList">
             <book-item
               :book="item"
@@ -49,6 +49,12 @@
             />
           </template>
         </div>
+        <van-empty
+          v-else
+          class="custom-image"
+          image="https://img.yzcdn.cn/vant/custom-empty-image.png"
+          description="还没有数据呢"
+        />
       </van-pull-refresh>
     </section>
     <!-- 下部分 列表项 结束 -->
@@ -183,6 +189,10 @@ export default {
   }
   .list {
     min-height: 150px;
+  }
+  .custom-image .van-empty__image {
+    width: 90px;
+    height: 90px;
   }
 }
 </style>
