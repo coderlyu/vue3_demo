@@ -26,20 +26,20 @@ export default {
       default: ""
     }
   },
-  setup() {
-    const isExternal = computed(() => external(this.iconClass));
-    const iconName = computed(() => `#icon-${this.iconClass}`);
+  setup(props) {
+    const isExternal = computed(() => external(props.iconClass));
+    const iconName = computed(() => `#icon-${props.iconClass}`);
     const svgClass = computed(() => {
-      if (this.className) {
-        return "svg-icon " + this.className;
+      if (props.className) {
+        return "svg-icon " + props.className;
       } else {
         return "svg-icon";
       }
     });
     const styleExternalIcon = computed(() => {
       return {
-        mask: `url(${this.iconClass}) no-repeat 50% 50%`,
-        "-webkit-mask": `url(${this.iconClass}) no-repeat 50% 50%`
+        mask: `url(${props.iconClass}) no-repeat 50% 50%`,
+        "-webkit-mask": `url(${props.iconClass}) no-repeat 50% 50%`
       };
     });
     return {
