@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import { isExternal } from "@/utils/validate";
+import { computed } from "@vue/composition-api";
+import { isExternal as external } from "@/utils/validate";
 
 export default {
   name: "SvgIcon",
@@ -25,26 +26,28 @@ export default {
       default: ""
     }
   },
-  computed: {
-    isExternal() {
-      return isExternal(this.iconClass);
-    },
-    iconName() {
-      return `#icon-${this.iconClass}`;
-    },
-    svgClass() {
+  setup() {
+    const isExternal = computed(() => external(this.iconClass));
+    const iconName = computed(() => `#icon-${this.iconClass}`);
+    const svgClass = computed(() => {
       if (this.className) {
         return "svg-icon " + this.className;
       } else {
         return "svg-icon";
       }
-    },
-    styleExternalIcon() {
+    });
+    const styleExternalIcon = computed(() => {
       return {
         mask: `url(${this.iconClass}) no-repeat 50% 50%`,
         "-webkit-mask": `url(${this.iconClass}) no-repeat 50% 50%`
       };
-    }
+    });
+    return {
+      isExternal,
+      iconName,
+      svgClass,
+      styleExternalIcon
+    };
   }
 };
 </script>
