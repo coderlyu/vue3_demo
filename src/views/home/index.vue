@@ -115,7 +115,7 @@ export default {
   components: {
     bookItem
   },
-  setup(props, ctx) {
+  setup() {
     const onSearch = () => {
       console.log(data.searchKey);
     };
@@ -134,6 +134,7 @@ export default {
     const toBookDetail = book => {
       console.log("跳转图书详情页", book.id);
     };
+
     const data = reactive({
       searchKey: "",
       orderVal: 0,
@@ -173,7 +174,6 @@ export default {
     font-weight: 700;
     .icon_style {
       font-size: 64px;
-      background: yellowgreen;
       color: #fff;
     }
     :nth-child(2) {
