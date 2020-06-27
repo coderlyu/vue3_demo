@@ -1,7 +1,11 @@
 <template>
   <div class="head">
     <div class="avatar">
-      <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="头像" />
+      <img
+        src="https://img.yzcdn.cn/vant/apple-1.jpg"
+        v-on="$listeners"
+        alt="头像"
+      />
     </div>
     <section class="intro">
       <h2 class="van-ellipsis">CODERLY</h2>

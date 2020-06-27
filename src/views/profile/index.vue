@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Head />
+    <Head @click="showAvatar" />
     <section class="mt-20">
       <van-grid :gutter="20" :column-num="3">
         <van-grid-item class="oper-item" @click="toDetail">
@@ -28,10 +28,14 @@
         </van-cell>
       </van-cell-group>
     </section>
+    <!-- 头像预览 -->
+    <van-image-preview v-model="show" :images="images" closeable>
+      <template :slot="0">头像</template>
+    </van-image-preview>
   </div>
 </template>
 <script>
-// import { reactive, toRefs, computed } from "@vue/composition-api";
+import { reactive, toRefs } from "@vue/composition-api";
 import Head from "./components/head";
 export default {
   components: {
@@ -42,8 +46,18 @@ export default {
     const toDetail = () => {
       _this.$toast("敬请期待");
     };
+    const data = reactive({
+      show: false,
+      images: ["https://img.yzcdn.cn/vant/apple-1.jpg"]
+    });
+    const showAvatar = () => {
+      console.log("hhhh");
+      data.show = true;
+    };
     return {
-      toDetail
+      toDetail,
+      ...toRefs(data),
+      showAvatar
     };
   }
 };
