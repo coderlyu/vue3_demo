@@ -1,7 +1,10 @@
 import { getToken, setToken, removeToken } from "@/utils/_ls";
-import { login, getInfo } from "@/api/user.js";
+import { getInfo } from "@/api/user.js";
 const state = {
-  token: getToken() || ""
+  token: getToken() || "",
+  user: {
+    name: "coderly"
+  }
 };
 const mutations = {
   SET_TOKEN: (state, token) => {
@@ -22,15 +25,24 @@ const actions = {
   },
   login({ commit }, user) {
     let { username, password } = user;
-    return new Promise((resolve, reject) => {
-      login({ user_number: username.trim(), password: password.trim() })
-        .then(_res => {
-          commit("SET_TOKEN", _res.token);
-          commit("SET_USER", _res.data);
-        })
-        .catch(err => {
-          reject(new Error(err));
-        });
+    return new Promise(resolve => {
+      // 模拟登录
+      setTimeout(() => {
+        if (!!username && !!password) {
+          let token = username + password + username;
+          commit("SET_TOKEN", token);
+          commit("SET_USER", token);
+          resolve();
+        }
+      }, 1000);
+      // login({ username: username.trim(), password: password.trim() })
+      //   .then(_res => {
+      //     commit("SET_TOKEN", _res.token);
+      //     commit("SET_USER", _res.data);
+      //   })
+      //   .catch(err => {
+      //     reject(new Error(err));
+      //   });
     });
   },
   getInfo({ commit }) {

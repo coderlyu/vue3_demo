@@ -29,9 +29,25 @@ const routes = [
         name: "profile",
         component: () =>
           import(/* webpackChunkName: "profile" */ "@/views/profile"),
-        meta: { title: "我的" }
+        meta: { title: "我的", rightFlag: 1 }
+      },
+      {
+        path: "setting",
+        name: "setting",
+        component: () => import("@/views/setting"),
+        meta: { title: "设置", leftFlag: 1 }
       }
     ]
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/login"),
+    meta: { title: "登录" }
+  },
+  {
+    path: "*",
+    component: () => import("@/views/404")
   }
 ];
 
