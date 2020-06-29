@@ -1,12 +1,6 @@
 <template>
   <div class="layout">
-    <van-nav-bar class="h_style" fixed>
-      <template #title>
-        <span class="h_title">{{
-          (route && route.meta && route.meta.title) || ""
-        }}</span>
-      </template></van-nav-bar
-    >
+    <navTop />
     <main>
       <header></header>
       <router-view />
@@ -23,19 +17,18 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed } from "@vue/composition-api";
+// import { reactive, toRefs, computed } from "@vue/composition-api";
+import navTop from "./navTop";
 export default {
+  components: {
+    navTop
+  },
   setup(props, ctx) {
     const _this = ctx.root;
-    const route = computed(() => _this.$route);
-    const data = reactive({
-      route
-    });
     const addMore = () => {
       _this.$toast("敬请期待");
     };
     return {
-      ...toRefs(data),
       addMore
     };
   }

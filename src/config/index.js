@@ -1,3 +1,4 @@
 module.exports = {
-  whiteList: ["/login", "/home", "/", "profile"]
+  whiteList: ["/login"]
+  // whiteList: ["/login", "/home", "/", "profile"]
 };
