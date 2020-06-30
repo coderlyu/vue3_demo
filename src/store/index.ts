@@ -4,7 +4,6 @@ import getters from "./getters";
 
 Vue.use(Vuex);
 
-
 const modulesFiles = require.context("./modules", true, /\.js$/);
 // const modulesFiles = require.context("./modules", true, /\.js$/);
 
