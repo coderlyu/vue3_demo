@@ -1,5 +1,5 @@
 # miniapp
-
+该分支将原来的项目改成了 `typescript` 
 ## Project setup
 ```
 npm install
