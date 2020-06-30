@@ -28,18 +28,34 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import { reactive, toRefs } from "@vue/composition-api";
-export default {
-  setup(props, ctx) {
-    const _this = ctx.root;
-    const data = reactive({
+
+interface dataInName {
+  username: string;
+  password: string;
+  [prop: string]: any;
+}
+interface dataName {
+  user: dataInName;
+  [prop: string]: any;
+}
+interface SubmitName {
+  (): void;
+}
+@Component
+export default class Login extends Vue {
+  // @Prop() private msg!: string;
+  setup(props: any, ctx: any) {
+    const _this: any = ctx.root;
+    const data: dataName = reactive({
       user: {
         username: "",
         password: ""
       }
     });
-    const onSubmit = () => {
+    const onSubmit: SubmitName = () => {
       _this.$store.dispatch("user/login", data.user);
     };
     return {
@@ -47,7 +63,25 @@ export default {
       onSubmit
     };
   }
-};
+}
+// export default {
+//   setup(props: any, ctx: any) {
+//     const _this = ctx.root;
+//     const data = reactive({
+//       user: {
+//         username: "",
+//         password: ""
+//       }
+//     });
+//     const onSubmit = () => {
+//       _this.$store.dispatch("user/login", data.user);
+//     };
+//     return {
+//       ...toRefs(data),
+//       onSubmit
+//     };
+//   }
+// };
 </script>
 
 <style lang="scss">

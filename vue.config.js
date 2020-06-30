@@ -1,17 +1,13 @@
 const path = require("path");
 const conf = require("./package-lock.json");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-function resolve(dir: string) {
+function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "/" : "./",
   lintOnSave: process.env.NODE_ENV === "development",
   assetsDir: "static",
-  // entry: resolve("./src/main.ts"),
-  entry: {
-    app: ["./src/main.ts"]
-  },
   devServer: {
     open: true,
     host: "0.0.0.0",
@@ -34,6 +30,9 @@ module.exports = {
     resolve: {
       extensions: [".js", ".vue", ".json", ".ts", ".tsx"]
     },
+    entry: {
+      app: resolve("./src/main.ts")
+    },
     output: {
       filename: `js/[name].${conf.version}.js`
     },
@@ -43,7 +42,7 @@ module.exports = {
       })
     ]
   },
-  chainWebpack: (config: any) => {
+  chainWebpack: config => {
     config.resolve.alias
       .set("_a", resolve("src/assets"))
       .set("@", resolve("src"))
@@ -67,7 +66,7 @@ module.exports = {
     config.module
       .rule("ts")
       .test(/\.tsx?$/)
-      .exclude.add(/node_modules/)
+      // .exclude.add(/node_modules/)
       .use("ts-loader")
       .loader("ts-loader")
       .options({

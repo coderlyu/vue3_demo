@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@types/qs": "^6.9.3",
-    "@types/webpack-dev-middleware": "^3.7.1",
     "@vue/composition-api": "^0.6.6",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",

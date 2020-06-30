@@ -34,14 +34,14 @@
     </van-image-preview>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { reactive, toRefs } from "@vue/composition-api";
-import Head from "./components/head";
+import Head from "./components/head.vue";
 export default {
   components: {
     Head
   },
-  setup(props, ctx) {
+  setup(props: any, ctx: any) {
     const _this = ctx.root;
     const toDetail = () => {
       _this.$toast("敬请期待");
@@ -51,7 +51,6 @@ export default {
       images: ["https://img.yzcdn.cn/vant/apple-1.jpg"]
     });
     const showAvatar = () => {
-      console.log("hhhh");
       data.show = true;
     };
     return {

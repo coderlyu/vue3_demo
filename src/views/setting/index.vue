@@ -9,7 +9,9 @@
 
 <script lang="ts">
 export default {
-  setup() {}
+  setup() {
+    return {};
+  }
 };
 </script>
 

@@ -16,23 +16,27 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 // import { reactive, toRefs, computed } from "@vue/composition-api";
-import navTop from "./navTop";
-export default {
+import { Component, Vue } from "vue-property-decorator";
+import navTop from "./navTop.vue";
+
+@Component({
   components: {
     navTop
-  },
-  setup(props, ctx) {
-    const _this = ctx.root;
-    const addMore = () => {
+  }
+})
+export default class Layout extends Vue {
+  setup(props: any, ctx: any) {
+    const _this: any = ctx.root;
+    const addMore = (): void => {
       _this.$toast("敬请期待");
     };
     return {
       addMore
     };
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

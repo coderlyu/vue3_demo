@@ -16,10 +16,10 @@
     <span class="link" @click="toDetail"><van-icon name="arrow"/></span>
   </div>
 </template>
-<script>
+<script lang="ts">
 // import { reactive, toRefs, computed } from "@vue/composition-api";
 export default {
-  setup(props, ctx) {
+  setup(props: any, ctx: any) {
     const _this = ctx.root;
     const toDetail = () => {
       _this.$toast("敬请期待");

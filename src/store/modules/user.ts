@@ -65,7 +65,7 @@ const actions = {
   },
   getInfo({ commit }: actionsName) {
     return new Promise((resolve, reject) => {
-      getInfo()
+      getInfo({})
         .then((_res: resultName) => {
           commit("SET_USER", _res.data);
         })

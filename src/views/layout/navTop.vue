@@ -16,32 +16,50 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import { reactive, toRefs, computed, watch } from "@vue/composition-api";
-export default {
-  setup(props, ctx) {
-    const _this = ctx.root;
+
+interface dataName {
+  route: any;
+  rightFlag: number;
+  rightClick: clickName;
+  leftFlag: number;
+  leftClick: clickName;
+  [prop: string]: any;
+}
+interface clickName {
+  (): void;
+}
+@Component
+export default class NavTop extends Vue {
+  setup(props: any, ctx: any) {
+    const _this: any = ctx.root;
     const route = computed(() => _this.$route);
-    const data = reactive({
+    const data: dataName = reactive({
       route,
       rightFlag: 0,
       rightClick: () => {},
       leftFlag: 0,
       leftClick: () => {}
     });
-    let clickRight = [
+    let clickRight: clickName[] = [
       () => {},
       () => {
         _this.$router.push("/profile/setting");
       }
     ];
-    let clickLeft = [
+    let clickLeft: clickName[] = [
       () => {},
       () => {
         _this.$router.go(-1);
       }
     ];
-    const getVal = (data, clickLeft, clickRight) => {
+    const getVal = (
+      data: dataName,
+      clickLeft: clickName[],
+      clickRight: clickName[]
+    ) => {
       data.rightFlag =
         route.value && route.value.meta && route.value.meta.rightFlag;
       data.rightClick =
@@ -53,15 +71,16 @@ export default {
       data.leftClick =
         route.value && route.value.meta && clickLeft[route.value.meta.leftFlag];
     };
-    watch(() => {
-      getVal(data, clickLeft, clickRight);
-    }, [route]);
+
     getVal(data, clickLeft, clickRight);
+    watch(route, () => {
+      getVal(data, clickLeft, clickRight);
+    });
     return {
       ...toRefs(data)
     };
   }
-};
+}
 </script>
 
 <style></style>

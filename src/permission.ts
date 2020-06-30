@@ -4,7 +4,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { getToken } from "@/utils/_ls";
 import getPageTitle from "@/utils/get-page-title";
-import { whiteList } from "@/config";
+import config from "@/config/index.ts";
 NProgress.configure({ showSpinner: false });
 
 router.beforeEach(async (to, from, next) => {
@@ -22,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
       next();
     }
   } else {
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (config.whiteList.indexOf(to.path) !== -1) {
       next();
     } else {
       next({ path: "/login" });

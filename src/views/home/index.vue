@@ -61,8 +61,9 @@
   </div>
 </template>
 <script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import { reactive, toRefs } from "@vue/composition-api";
-import bookItem from "@/components/book-item";
+import bookItem from "@/components/book-item/index.vue";
 const d = {
   orderOpt: [
     { text: "默认排序", value: 0 },
@@ -111,31 +112,66 @@ const b = [
       "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
   }
 ];
-export default {
+
+interface clickName {
+  (): void;
+}
+interface bookClickName {
+  (book: bookName): void;
+}
+
+interface typeName {
+  text: string;
+  value: number;
+}
+interface orderName {
+  text: string;
+  value: number;
+}
+interface bookName {
+  id: number;
+  title: string;
+  author: string;
+  url: string;
+  descript: string;
+  [prop: string]: any;
+}
+interface dataName {
+  searchKey: string;
+  orderVal: number;
+  orderOpt: orderName[];
+  typeVal: number;
+  typeOpt: typeName[];
+  reLoading: boolean;
+  bookList: bookName[];
+  [prop: string]: any;
+}
+@Component({
   components: {
     bookItem
-  },
+  }
+})
+export default class Home extends Vue {
   setup() {
-    const onSearch = () => {
+    const onSearch: clickName = () => {
       console.log(data.searchKey);
     };
-    const toBorrow = () => {
+    const toBorrow: clickName = () => {
       console.log("toBorrow");
     };
-    const toReturn = () => {
+    const toReturn: clickName = () => {
       console.log("toReturn");
     };
-    const onRefresh = () => {
-      console.log("onRefresh");
+    const onRefresh: clickName = () => {
       setTimeout(() => {
         data.reLoading = false;
       }, 1000);
     };
-    const toBookDetail = book => {
+    const toBookDetail: bookClickName = (book: bookName) => {
       console.log("跳转图书详情页", book.id);
     };
 
-    const data = reactive({
+    const data: dataName = reactive({
       searchKey: "",
       orderVal: 0,
       orderOpt: d.orderOpt,
@@ -157,7 +193,7 @@ export default {
       ...methods
     };
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .operations {
