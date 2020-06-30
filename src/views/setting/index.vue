@@ -7,13 +7,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   setup() {}
 };
 </script>
 
-<style lang="scss">
-.setting {
-}
-</style>
+<style lang="scss"></style>

@@ -1,5 +1,22 @@
 import { getToken, setToken, removeToken } from "@/utils/_ls";
-import { getInfo } from "@/api/user.js";
+import { getInfo } from "@/api/user";
+interface userName {
+  name?: string;
+}
+interface stateName {
+  token: string;
+  user?: userName;
+}
+interface actionsName {
+  commit?: any;
+}
+interface userInfo {
+  username: string;
+  password: string;
+}
+interface resultName {
+  data: object | [];
+}
 const state = {
   token: getToken() || "",
   user: {
@@ -7,23 +24,24 @@ const state = {
   }
 };
 const mutations = {
-  SET_TOKEN: (state, token) => {
+  SET_TOKEN: (state: stateName, token: any) => {
     state.token = token;
     setToken(token);
   },
-  SET_USER: (state, user) => {
+  SET_USER: (state: stateName, user: any) => {
     state.user = user;
   },
-  REMOVE_TOKEN: state => {
-    state.user = "";
+  REMOVE_TOKEN: (state: stateName) => {
+    state.user = {};
     removeToken();
   }
 };
+
 const actions = {
-  clearToken({ commit }) {
+  clearToken({ commit }: actionsName) {
     commit("REMOVE_TOKEN");
   },
-  login({ commit }, user) {
+  login({ commit }: actionsName, user: userInfo) {
     let { username, password } = user;
     return new Promise(resolve => {
       // 模拟登录
@@ -45,13 +63,13 @@ const actions = {
       //   });
     });
   },
-  getInfo({ commit }) {
+  getInfo({ commit }: actionsName) {
     return new Promise((resolve, reject) => {
       getInfo()
-        .then(_res => {
+        .then((_res: resultName) => {
           commit("SET_USER", _res.data);
         })
-        .catch(err => {
+        .catch((err: any) => {
           reject(new Error(err));
         });
     });

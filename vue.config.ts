@@ -1,13 +1,17 @@
 const path = require("path");
 const conf = require("./package-lock.json");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-function resolve(dir) {
+function resolve(dir: string) {
   return path.join(__dirname, dir);
 }
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "/" : "./",
   lintOnSave: process.env.NODE_ENV === "development",
   assetsDir: "static",
+  // entry: resolve("./src/main.ts"),
+  entry: {
+    app: ["./src/main.ts"]
+  },
   devServer: {
     open: true,
     host: "0.0.0.0",
@@ -27,7 +31,9 @@ module.exports = {
     }
   },
   configureWebpack: {
-    externals: {},
+    resolve: {
+      extensions: [".js", ".vue", ".json", ".ts", ".tsx"]
+    },
     output: {
       filename: `js/[name].${conf.version}.js`
     },
@@ -37,7 +43,7 @@ module.exports = {
       })
     ]
   },
-  chainWebpack: config => {
+  chainWebpack: (config: any) => {
     config.resolve.alias
       .set("_a", resolve("src/assets"))
       .set("@", resolve("src"))
@@ -56,6 +62,16 @@ module.exports = {
       .loader("svg-sprite-loader")
       .options({
         symbolId: "icon-[name]"
+      })
+      .end();
+    config.module
+      .rule("ts")
+      .test(/\.tsx?$/)
+      .exclude.add(/node_modules/)
+      .use("ts-loader")
+      .loader("ts-loader")
+      .options({
+        appendTsSuffixTo: [/\.vue$/]
       })
       .end();
   }

@@ -60,7 +60,7 @@
     <!-- 下部分 列表项 结束 -->
   </div>
 </template>
-<script>
+<script lang="ts">
 import { reactive, toRefs } from "@vue/composition-api";
 import bookItem from "@/components/book-item";
 const d = {

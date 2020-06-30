@@ -1,9 +1,9 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import VueRouter, { RouteConfig } from "vue-router";
 import Layout from "_v/layout/index.vue";
 Vue.use(VueRouter);
 
-const routes = [
+const routes: Array<RouteConfig> = [
   {
     path: "/",
     redirect: "/home"
@@ -15,7 +15,7 @@ const routes = [
       {
         path: "",
         name: "home",
-        component: () => import("@/views/home"),
+        component: () => import("@/views/home/index.vue"),
         meta: { title: "主页" }
       }
     ]
@@ -28,13 +28,13 @@ const routes = [
         path: "",
         name: "profile",
         component: () =>
-          import(/* webpackChunkName: "profile" */ "@/views/profile"),
+          import(/* webpackChunkName: "profile" */ "@/views/profile/index.vue"),
         meta: { title: "我的", rightFlag: 1 }
       },
       {
         path: "setting",
         name: "setting",
-        component: () => import("@/views/setting"),
+        component: () => import("@/views/setting/index.vue"),
         meta: { title: "设置", leftFlag: 1 }
       }
     ]
@@ -42,12 +42,12 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/login"),
+    component: () => import("@/views/login/index.vue"),
     meta: { title: "登录" }
   },
   {
     path: "*",
-    component: () => import("@/views/404")
+    component: () => import("@/views/404/index.vue")
   }
 ];
 

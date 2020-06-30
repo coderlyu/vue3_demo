@@ -1,10 +1,10 @@
-const TokenKey = "quwan-token";
+const TokenKey: string = "quwan-token";
 // token 本地持久化 存储
 export function getToken() {
   return localStorage.getItem(TokenKey);
 }
 
-export function setToken(token) {
+export function setToken(token: string) {
   return localStorage.setItem(TokenKey, token);
 }
 
