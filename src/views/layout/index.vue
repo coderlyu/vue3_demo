@@ -28,6 +28,7 @@ import navTop from "./navTop.vue";
 })
 export default class Layout extends Vue {
   setup(props: any, ctx: any) {
+    console.log("yundinlema");
     const _this: any = ctx.root;
     const addMore = (): void => {
       _this.$toast("敬请期待");
