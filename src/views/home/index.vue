@@ -161,6 +161,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .operations {
+  background: #fff;
   border: 1px solid #efefef;
   padding: 20px 0;
   box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.2);
@@ -182,8 +183,10 @@ export default {
   }
 }
 .list-wrapper {
+  background: #fff;
   margin-top: 20px;
   h2 {
+    line-height: 200%;
     font-size: 16px;
     margin-left: 1em;
   }

@@ -66,6 +66,8 @@ export default {
 
 <style lang="scss">
 .h_style {
-  background: #efefef;
+  /deep/ .van-nav-bar {
+    background: #f5f5f5 !important;
+  }
 }
 </style>

@@ -42,7 +42,7 @@ export default {
     left: 0;
     right: 0;
     z-index: 2;
-    background: #fff;
+    background: #f5f5f5;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
   }
