@@ -29,7 +29,7 @@ const routes = [
         name: "profile",
         component: () =>
           import(/* webpackChunkName: "profile" */ "@/views/profile"),
-        meta: { title: "我的", rightFlag: 1 }
+        meta: { title: "我的" } //rightFlag: 1 隐藏设置
       },
       {
         path: "setting",

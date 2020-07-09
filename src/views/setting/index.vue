@@ -16,14 +16,14 @@
         </template>
       </van-cell>
     </van-cell-group>
-    <van-cell-group class="setting-item">
+    <!-- <van-cell-group class="setting-item">
       <van-cell is-link>
         <template #title>
           <span class="custom-title">检测更新</span>
           <span class="new_tips">NEW</span>
         </template>
       </van-cell>
-    </van-cell-group>
+    </van-cell-group> -->
     <section class="btn-wrapper">
       <van-button type="danger" block @click="() => (show = !show)"
         >退出登录</van-button
