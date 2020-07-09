@@ -1,6 +1,4 @@
 const path = require("path");
-const conf = require("./package-lock.json");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -25,17 +23,6 @@ module.exports = {
         }
       }
     }
-  },
-  configureWebpack: {
-    externals: {},
-    output: {
-      filename: `js/[name].${conf.version}.js`
-    },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: `css/[name].${conf.version}.css`
-      })
-    ]
   },
   chainWebpack: config => {
     config.resolve.alias

@@ -39,8 +39,9 @@ export default {
         password: ""
       }
     });
-    const onSubmit = () => {
-      _this.$store.dispatch("user/login", data.user);
+    const onSubmit = async () => {
+      await _this.$store.dispatch("user/login", data.user);
+      _this.$router.push("/home");
     };
     return {
       ...toRefs(data),

@@ -39,6 +39,7 @@ export default {
 .layout {
   overflow-y: auto;
   overflow-x: hidden;
+  background: #efefef;
 }
 header {
   height: 46px;

@@ -55,6 +55,15 @@ const actions = {
           reject(new Error(err));
         });
     });
+  },
+  logout({ commit }) {
+    return new Promise(resolve => {
+      // 模拟登出
+      setTimeout(() => {
+        commit("REMOVE_TOKEN");
+        resolve();
+      }, 1000);
+    });
   }
 };
 const getters = {};

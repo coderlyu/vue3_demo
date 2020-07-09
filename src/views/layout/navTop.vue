@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed, watch } from "@vue/composition-api";
+import { reactive, toRefs, computed, watchEffect } from "@vue/composition-api";
 export default {
   setup(props, ctx) {
     const _this = ctx.root;
@@ -53,7 +53,7 @@ export default {
       data.leftClick =
         route.value && route.value.meta && clickLeft[route.value.meta.leftFlag];
     };
-    watch(() => {
+    watchEffect(() => {
       getVal(data, clickLeft, clickRight);
     }, [route]);
     getVal(data, clickLeft, clickRight);
@@ -64,4 +64,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.h_style {
+  background: #efefef;
+}
+</style>
