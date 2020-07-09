@@ -34,18 +34,18 @@ export default {
   height: 120px;
   display: flex;
   position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    height: 10px;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    background: #f5f5f5;
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   height: 10px;
+  //   bottom: -1px;
+  //   left: 0;
+  //   right: 0;
+  //   z-index: 2;
+  //   background: #f5f5f5;
+  //   border-top-left-radius: 50%;
+  //   border-top-right-radius: 50%;
+  // }
   .avatar {
     display: flex;
     justify-content: center;
