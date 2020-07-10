@@ -2,11 +2,12 @@ import axios from "axios";
 import qs from "qs";
 import router from "@/router";
 import store from "@/store";
+import { Toast } from "vant";
 import { getToken } from "@/utils/_ls";
+const conf = require("@/config");
 
 const service = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "development" ? "/api" : "http://127.0.0.1:3002",
+  baseURL: process.env.NODE_ENV === "development" ? "/api" : conf.baseURL,
   timeout: 5000,
   transformRequest: [
     function(data) {
@@ -19,7 +20,7 @@ service.interceptors.request.use(
   config => {
     if (store.getters.token) {
       // 给 请求头添加上 token
-      config.headers["authorization-token"] = getToken() || "";
+      config.headers["authorizationToken"] = getToken() || "";
     }
     return config;
   },
@@ -31,13 +32,16 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data;
-    if (res.code === 4) {
-      // 假设 code = 4 为 token 过期
+    // token 不存在、过期
+    if (res.code === 200001 || res.code === 200002) {
+      Toast.fail("token不存在或过期");
       store.dispatch("user/clearToken");
-      router.replace({
-        path: "login",
-        query: { redirect: router.currentRoute.fullPath }
-      });
+      router.push("/login");
+      throw Error("token不存在或过期");
+    }
+    if (res.code === 200003) {
+      Toast.fail("用户不存在或密码错误");
+      throw Error("用户不存在或密码错误");
     }
     return res;
   },

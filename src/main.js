@@ -7,8 +7,8 @@ import Vant, { Lazyload } from "vant";
 import "vant/lib/index.css";
 import VueCompositionApi from "@vue/composition-api";
 import "./permission";
-Vue.config.productionTip = false;
 
+Vue.config.productionTip = false;
 Vue.use(VueCompositionApi);
 Vue.use(Vant);
 Vue.use(Lazyload);

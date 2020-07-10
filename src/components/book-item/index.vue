@@ -2,11 +2,11 @@
   <div class="book" v-on="$listeners">
     <span class="book-tag">HOT</span>
     <section class="left">
-      <img :src="book.url" alt="图书图片" />
+      <img :src="book.imgUrl" alt="图书图片" />
     </section>
     <section class="right">
-      <h3 class="van-ellipsis">{{ book.title }}</h3>
-      <p class="author van-ellipsis"><span>作者：</span> {{ book.author }}</p>
+      <h3 class="ly-ellipsis">{{ book.title }}</h3>
+      <p class="author ly-ellipsis"><span>作者：</span> {{ book.author }}</p>
       <p class="describe van-multi-ellipsis--l2">
         {{ book.descript || "还没有简介哦" }}
       </p>
@@ -24,7 +24,7 @@ export default {
   setup() {}
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .book {
   margin-top: 15px;
   padding-bottom: 5px;
@@ -83,5 +83,12 @@ export default {
       font-weight: 200;
     }
   }
+}
+.ly-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 </style>

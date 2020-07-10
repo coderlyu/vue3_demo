@@ -1,30 +1,31 @@
 <template>
   <div class="head">
     <div class="avatar">
-      <img
-        src="https://img.yzcdn.cn/vant/apple-1.jpg"
-        v-on="$listeners"
-        alt="头像"
-      />
+      <img :src="avatar" v-on="$listeners" alt="头像" />
     </div>
     <section class="intro">
-      <h2 class="van-ellipsis">CODERLY</h2>
+      <h2 class="van-ellipsis">{{ name }}</h2>
       <p class="desc van-ellipsis">
-        {{ "这家伙很懒，还没有动态，省略号这家伙很懒，还没有动态，省略号" }}
+        {{ intro }}
       </p>
     </section>
     <span class="link" @click="toDetail"><van-icon name="arrow"/></span>
   </div>
 </template>
 <script>
-// import { reactive, toRefs, computed } from "@vue/composition-api";
+import { reactive, toRefs, computed } from "@vue/composition-api";
 export default {
   setup(props, ctx) {
     const _this = ctx.root;
     const toDetail = () => {
       _this.$toast("敬请期待");
     };
-    return { toDetail };
+    const data = reactive({
+      name: computed(() => _this.$store.getters["user/name"]),
+      avatar: computed(() => _this.$store.getters["user/avatar"]),
+      intro: computed(() => _this.$store.getters["user/intro"])
+    });
+    return { ...toRefs(data), toDetail };
   }
 };
 </script>
@@ -34,18 +35,6 @@ export default {
   height: 120px;
   display: flex;
   position: relative;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   height: 10px;
-  //   bottom: -1px;
-  //   left: 0;
-  //   right: 0;
-  //   z-index: 2;
-  //   background: #f5f5f5;
-  //   border-top-left-radius: 50%;
-  //   border-top-right-radius: 50%;
-  // }
   .avatar {
     display: flex;
     justify-content: center;

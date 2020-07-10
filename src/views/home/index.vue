@@ -61,8 +61,9 @@
   </div>
 </template>
 <script>
-import { reactive, toRefs } from "@vue/composition-api";
+import { reactive, toRefs, onMounted } from "@vue/composition-api";
 import bookItem from "@/components/book-item";
+import { getBookList } from "@/api/book.js";
 const d = {
   orderOpt: [
     { text: "默认排序", value: 0 },
@@ -77,40 +78,6 @@ const d = {
     { text: "服务器开发", value: 4 }
   ]
 };
-const b = [
-  {
-    id: 1,
-    title: "历史的B面",
-    author: "鲜果图书",
-    url: "https://img.yzcdn.cn/vant/apple-1.jpg",
-    descript:
-      "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
-  },
-  {
-    id: 2,
-    title: "知乎精选",
-    author: "知乎网站",
-    url: "https://img.yzcdn.cn/vant/apple-1.jpg",
-    descript:
-      "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
-  },
-  {
-    id: 3,
-    title: "让每个人都能倾诉",
-    author: "和菜头",
-    url: "https://img.yzcdn.cn/vant/apple-1.jpg",
-    descript:
-      "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
-  },
-  {
-    id: 4,
-    title: "萧秋水的读书笔记",
-    author: "萧秋水",
-    url: "https://img.yzcdn.cn/vant/apple-1.jpg",
-    descript:
-      "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
-  }
-];
 export default {
   components: {
     bookItem
@@ -142,7 +109,7 @@ export default {
       typeVal: 0,
       typeOpt: d.typeOpt,
       reLoading: false,
-      bookList: b
+      bookList: []
     });
     // 统一导出的 方法
     const methods = {
@@ -152,6 +119,10 @@ export default {
       onRefresh,
       toBookDetail
     };
+    onMounted(async () => {
+      let _result = await getBookList();
+      data.bookList = _result.data;
+    });
     return {
       ...toRefs(data),
       ...methods

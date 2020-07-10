@@ -1,13 +1,12 @@
 import { getToken, setToken, removeToken } from "@/utils/_ls";
-import { getInfo } from "@/api/user.js";
+import { getUserInfo, login } from "@/api/user.js";
 const state = {
   token: getToken() || "",
-  user: {
-    name: "coderly"
-  }
+  user: ""
 };
 const mutations = {
   SET_TOKEN: (state, token) => {
+    token = token || "";
     state.token = token;
     setToken(token);
   },
@@ -25,31 +24,23 @@ const actions = {
   },
   login({ commit }, user) {
     let { username, password } = user;
-    return new Promise(resolve => {
-      // 模拟登录
-      setTimeout(() => {
-        if (!!username && !!password) {
-          let token = username + password + username;
-          commit("SET_TOKEN", token);
-          commit("SET_USER", token);
+    return new Promise((resolve, reject) => {
+      login({ username: username.trim(), password: password.trim() })
+        .then(_res => {
+          commit("SET_TOKEN", _res.data.token);
           resolve();
-        }
-      }, 1000);
-      // login({ username: username.trim(), password: password.trim() })
-      //   .then(_res => {
-      //     commit("SET_TOKEN", _res.token);
-      //     commit("SET_USER", _res.data);
-      //   })
-      //   .catch(err => {
-      //     reject(new Error(err));
-      //   });
+        })
+        .catch(err => {
+          reject(new Error(err));
+        });
     });
   },
   getInfo({ commit }) {
     return new Promise((resolve, reject) => {
-      getInfo()
+      getUserInfo()
         .then(_res => {
           commit("SET_USER", _res.data);
+          resolve();
         })
         .catch(err => {
           reject(new Error(err));
@@ -66,7 +57,20 @@ const actions = {
     });
   }
 };
-const getters = {};
+const getters = {
+  name(state) {
+    return (state.user && state.user.name) || "";
+  },
+  avatar(state) {
+    return (state.user && state.user.avatar) || "";
+  },
+  intro(state) {
+    return (state.user && state.user.intro) || "";
+  },
+  roles(state) {
+    return (state.user && state.user.roles) || "";
+  }
+};
 
 export default {
   namespaced: true,

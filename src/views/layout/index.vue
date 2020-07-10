@@ -3,7 +3,9 @@
     <navTop />
     <main>
       <header></header>
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
       <footer></footer>
     </main>
     <van-tabbar route>

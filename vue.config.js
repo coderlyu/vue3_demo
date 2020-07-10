@@ -1,4 +1,5 @@
 const path = require("path");
+// const conf = require("./src/config");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -7,22 +8,23 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === "development",
   assetsDir: "static",
   devServer: {
-    open: true,
+    open: false,
     host: "0.0.0.0",
     useLocalIp: true,
     port: 5002,
     https: false,
     hotOnly: false,
-    proxy: {
-      "/api": {
-        target: "http://127.0.0.1:3002",
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: {
-          "^/api": ""
-        }
-      }
-    }
+    // proxy: {
+    //   "/api": {
+    //     target: conf.proxyUrl,
+    //     ws: true,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/api": ""
+    //     }
+    //   }
+    // },
+    before: require("./mock/mock-server")
   },
   chainWebpack: config => {
     config.resolve.alias
